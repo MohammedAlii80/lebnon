@@ -42,7 +42,7 @@
                        position="after">
                     <field name="dollar_2day" invisible="1"/>
                     <field name="dollar_out_bank" invisible="1"/>
-                    <field name="new_sub" invisible=""/>
+                    <field name="new_sub" invisible="1"/>
                     <field name="new_sub_with_tax" invisible="1"/>
                     <field name="new_field" invisible="1"/>
                     <field name="new_field2" invisible="1"/>
@@ -85,24 +85,81 @@
             </field>
         </record>
 
-        <record id="account_move_line_form_inh" model="ir.ui.view">
-            <field name="name">account</field>
-            <field name="model">account.move</field>
-            <field name="inherit_id" ref="account.view_move_form"/>
+<!--        <record id="account_move_line_form_inh" model="ir.ui.view">-->
+<!--            <field name="name">account</field>-->
+<!--            <field name="model">account.move</field>-->
+<!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='tax_ids']"-->
+<!--                       position="after">-->
+<!--                    <field name="re_new_sub"/>-->
+
+
+<!--                    <field name="re_new_sub_with_tax"/>-->
+<!--                </xpath>-->
+
+
+<!--                &lt;!&ndash;                <xpath expr="//field[@name='tax_totals_json']" position="replace">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <field name="total_vat"/>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </xpath>&ndash;&gt;-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+<!--        Vat In Sale Order And Sale Order Lines-->
+
+
+        <record id="sale_line_price_one_lebnon" model="ir.ui.view">
+            <field name="name">sale price</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
 
-                <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='tax_ids']"
+                <xpath expr="//page[@name='order_lines']/field[@name='order_line']/tree/field[@name='price_unit']"
                        position="after">
-                    <field name="re_new_sub"/>
-
-
-                    <field name="re_new_sub_with_tax"/>
+                    <field name="dollar_2day" invisible="1"/>
+                    <field name="dollar_out_bank" invisible="1"/>
+                    <field name="new_sub" invisible="1"/>
+                    <field name="new_sub_with_tax" invisible="1"/>
+                    <field name="new_field" invisible="1"/>
+                    <field name="new_field2" invisible="1"/>
                 </xpath>
 
 
-                <!--                <xpath expr="//field[@name='tax_totals_json']" position="replace">-->
-                <!--                    <field name="total_vat"/>-->
-                <!--                </xpath>-->
+                <xpath expr="//group[@class='oe_subtotal_footer oe_right']"
+                       position="after">
+
+                    <div style="width:175px; float:right;">
+                        <field name="untaxtotal_vat" invisible="1"/>
+                        <field name="text_amount_three"/>
+
+                        <field name="amount_taxes" invisible="1"/>
+
+                        <field name="text_amount_klhoh"/>
+
+
+                        <!--                        <field name="text_amount_two"/>-->
+
+                        <field name="totallebnon_vat" invisible="1"/>
+                        <field name="text_amount"/>
+
+
+                        <!--                        <group class="oe_subtotal_footer oe_inline">-->
+
+                    </div>
+
+
+                    <!--                        <field name="amount_taxes"/>-->
+
+                    <!--                        <field name="text_amount_fgwefgy"/>-->
+
+                    <!--                </group>-->
+                    <!--                    <field name="untaxtotal_vat"/>-->
+
+                </xpath>
+
+
             </field>
         </record>
 

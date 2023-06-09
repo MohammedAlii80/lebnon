@@ -1,24 +1,104 @@
 <odoo>
     <data>
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
+
+
+        <template inherit_id="purchase.report_purchaseorder_document" id="simple_label_eur">
+            <xpath expr="//div[@class='row justify-content-end']" position="after">
+                <t t-if="o.currency_id.name=='EUR'">
+                    <div id="total" class="row justify-content-end">
+                        <div class="col-4">
+                            <table class="table table-sm table-borderless">
+                                <t t-set="tax_totals" t-value="o.tax_totals"/>
+                                <t t-call="account.document_tax_totals"/>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div align="right">VAT Amt 11% :
+                        <span style="padding: 20px;" t-field="o.text_amount_klhoh"/>
+                    </div>
+
+
+                </t>
+
+
+            </xpath>
+
+
         </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
-            </t>
-          </dl>
+
+
+        <template inherit_id="purchase.report_purchaseorder_document" id="custom_report_usd">
+            <xpath expr="//div[@class='row justify-content-end']" position="after">
+                <t t-if="o.currency_id.name=='USD'">
+                    <div id="total" class="row justify-content-end">
+                        <div class="col-4">
+                            <table class="table table-sm table-borderless">
+                                <t t-set="tax_totals" t-value="o.tax_totals"/>
+                                <t t-call="account.document_tax_totals"/>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div align="right">VAT Amt 11% :
+                        <span style="padding: 20px;" t-field="o.text_amount_klhoh"/>
+                    </div>
+
+
+                </t>
+
+
+            </xpath>
+
+
         </template>
--->
+
+
+        <!--        <div class="col-4">-->
+        <!--            <table class="table table-sm table-borderless">-->
+        <!--                <t t-set="tax_totals" t-value="o.tax_totals"/>-->
+        <!--                <t t-call="account.document_tax_totals"/>-->
+        <!--            </table>-->
+        <!--        </div>-->
+        <template inherit_id="purchase.report_purchaseorder_document" id="lebnon_currency_report">
+            <!--            <xpath expr="//div[@class='col-4']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+
+            <xpath expr="//table[@class='table table-sm table-borderless']" position="replace">
+
+                <table class="table table-sm table-borderless">
+                    <t t-if="o.currency_id.name=='LBP'">
+                        <br/>
+
+                        <div align="left" style="font-size:10pt;margin-bottom:5pt;">الاجمالي قبل الخصم :
+                            <span style="padding: 10px;" t-field="o.text_amount_three"/>
+                        </div>
+                        <br/>
+                        <div align="left" style="font-size:10pt;margin-bottom:5pt;">الضريبة المضافة:
+                            <span style="padding: 10px;" t-field="o.text_amount_klhoh"/>
+                        </div>
+                        <br/>
+                        <div align="left" style="font-size:10pt;margin-bottom:5pt;">الاجمالي:
+                            <span style="padding: 10px;" t-field="o.text_amount"/>
+                        </div>
+
+
+                        <!--                        <strong t-field="o.text_amount_three"/>-->
+                        <!--                        <br/>-->
+                        <!--                        <strong t-field="o.text_amount_klhoh"/>-->
+                        <!--                        <br/>-->
+                        <!--                        <strong t-field="o.text_amount"/>-->
+                    </t>
+
+                </table>
+
+
+            </xpath>
+
+
+        </template>
+
+
     </data>
 </odoo>
